@@ -1351,6 +1351,45 @@ Object.entries(contactPolishTranslations).forEach(([lang, values]) => {
 });
 
 
+
+const seoGuideTranslations = {
+  it: {
+    readGuide: 'Leggi guida',
+    quickConceptsTitle: 'Concetti rapidi',
+    guidesTitle: 'Guide poker e blackjack',
+    guidesText: 'Guide pratiche e strumenti per capire odds, equity, pot odds, draw, errori comuni e decisioni blackjack.',
+  },
+  en: {
+    readGuide: 'Read guide',
+    quickConceptsTitle: 'Quick concepts',
+    guidesTitle: 'Poker and blackjack guides',
+    guidesText: 'Practical guides and tools to understand odds, equity, pot odds, draws, common mistakes and blackjack decisions.',
+  },
+  es: {
+    readGuide: 'Leer guía',
+    quickConceptsTitle: 'Conceptos rápidos',
+    guidesTitle: 'Guías de póker y blackjack',
+    guidesText: 'Guías prácticas y herramientas para entender odds, equity, pot odds, proyectos, errores comunes y decisiones de blackjack.',
+  },
+  fr: {
+    readGuide: 'Lire le guide',
+    quickConceptsTitle: 'Concepts rapides',
+    guidesTitle: 'Guides poker et blackjack',
+    guidesText: 'Guides pratiques et outils pour comprendre odds, equity, pot odds, tirages, erreurs courantes et décisions blackjack.',
+  },
+  de: {
+    readGuide: 'Guide lesen',
+    quickConceptsTitle: 'Schnelle Konzepte',
+    guidesTitle: 'Poker- und Blackjack-Guides',
+    guidesText: 'Praktische Guides und Tools, um Odds, Equity, Pot Odds, Draws, häufige Fehler und Blackjack-Entscheidungen zu verstehen.',
+  }
+};
+
+Object.entries(seoGuideTranslations).forEach(([lang, values]) => {
+  translations[lang] = { ...(translations[lang] || {}), ...values };
+});
+
+
 function interpolate(value, vars = {}) {
   if (typeof value !== 'string') return value;
   return value.replace(/\{(\w+)\}/g, (_, key) => (vars[key] ?? `{${key}}`));

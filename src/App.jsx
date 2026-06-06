@@ -13,6 +13,7 @@ import ContactPage from './pages/ContactPage.jsx';
 import FAQPage from './pages/FAQPage.jsx';
 import StrategyPage from './pages/StrategyPage.jsx';
 import SupportPage from './pages/SupportPage.jsx';
+import SeoGuidePage from './pages/SeoGuidePage.jsx';
 import SupportButton from './components/SupportButton.jsx';
 import { LanguageProvider, useLanguage } from './i18n.jsx';
 
@@ -40,6 +41,12 @@ const pageRoutes = {
   blackjack: '/blackjack',
   strategy: '/strategy',
   guides: '/guides',
+  guidePotOdds: '/guides/pot-odds-explained',
+  guideEquity: '/guides/poker-equity-explained',
+  guideFlushDraw: '/guides/flush-draw-odds',
+  guideStraightDraw: '/guides/straight-draw-odds',
+  guideMistakes: '/guides/top-10-poker-mistakes',
+  guideBlackjack: '/guides/blackjack-hit-or-stand',
   desktop: '/leak-finder',
   faq: '/faq',
   about: '/about',
@@ -126,6 +133,12 @@ function AppContent() {
     blackjack: BlackjackTrainer,
     strategy: StrategyPage,
     guides: GuidesPage,
+    guidePotOdds: (props) => <SeoGuidePage {...props} guideKey="potOdds" />,
+    guideEquity: (props) => <SeoGuidePage {...props} guideKey="equity" />,
+    guideFlushDraw: (props) => <SeoGuidePage {...props} guideKey="flushDraw" />,
+    guideStraightDraw: (props) => <SeoGuidePage {...props} guideKey="straightDraw" />,
+    guideMistakes: (props) => <SeoGuidePage {...props} guideKey="mistakes" />,
+    guideBlackjack: (props) => <SeoGuidePage {...props} guideKey="blackjack" />,
     desktop: DesktopPage,
     faq: FAQPage,
     about: AboutPage,

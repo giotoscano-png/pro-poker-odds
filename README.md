@@ -180,3 +180,18 @@ export const PAYPAL_ME_USERNAME = 'giovannipoker';
 - Premium polish for header, cards and inner pages
 - Contact page upgraded while keeping the form non-sending/simple
 - Routing, security headers and tester privacy note preserved
+
+
+## V5.4 SEO Guides Pack
+- Added SEO-style guide pages for:
+  - Pot Odds Explained
+  - Poker Equity Explained
+  - Flush Draw Odds
+  - Straight Draw Odds
+  - Top 10 Poker Mistakes for Beginners
+  - Blackjack Hit or Stand Chart
+- Added shareable hash routes under #/guides/...
+- Added guide cards to the Guides hub
+- Added CTA buttons from guide pages to relevant tools
+- Added dynamic document title and meta description updates for guide pages
+- Added guide copy in Italian and English, with localized ES/FR/DE titles and descriptions
