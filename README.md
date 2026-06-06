@@ -1,18 +1,23 @@
-# PRO Poker Odds V2
+# PRO Poker Odds V3.0 Complete MVP
 
-Versione V2 della web app gratuita.
+Versione completa MVP della web app gratuita.
 
-## Novità V2
+## Include
 
-- Home professionale
-- Poker odds calculator
-- Pot odds calculator
-- Blackjack trainer
-- Pagina Guide
-- Pagina Disclaimer / Privacy
-- Pagina Poker Leak Finder / PC App coming soon
-- Favicon incluso
-- Nessuna dipendenza da Base44
+- Home più commerciale e chiara
+- Analizza Mani / Hand History Analyzer
+- Poker Odds Calculator
+- Pot Odds Calculator
+- Blackjack Trainer
+- Strategia rapida
+- Guide pratiche
+- FAQ
+- About
+- Contatti
+- Disclaimer / Privacy / Cookie base
+- Roadmap Poker Leak Finder
+- Layout full width desktop
+- Carte colorate nel tester hand history
 
 ## Avvio locale
 
@@ -27,68 +32,121 @@ npm run dev
 npm run build
 ```
 
+## Nota
+
 Solo uso educativo. Nessun gioco con denaro reale. Nessuna assistenza live.
 
 
-## V2.1
+## V3.1 PayPal Support
 
-- Selettore lingua: Italiano, English, Français, Español
-- Italiano impostato come lingua predefinita
+- Aggiunta pagina Supporta
+- Aggiunto bottone “Supporta il progetto — €2”
+- Pagamento tramite link PayPal.Me
+- Configurazione in `src/config/payment.js`
 
+### Configurare PayPal
 
-## V2.2 Fixed
+Nel file `src/config/payment.js`, sostituisci:
 
-- Fix pagina Blackjack e PC App che diventavano nere
-- Testi italiani rifiniti come base
-- Build testata con `npm run build`
+```js
+export const PAYPAL_ME_USERNAME = 'INSERISCI_USERNAME_PAYPALME';
+```
 
+con il tuo username PayPal.Me.  
+Esempio: se il tuo link è `https://paypal.me/giovannipoker`, scrivi:
 
-## V2.3
-
-- Aggiunta pagina Hand History Tester
-- Upload / paste hand history .txt
-- Mini analisi demo post-sessione per preparare la futura app PC
-
-
-## V2.4
-
-- Hand History Analyzer mano per mano
-- Prima classificazione: possibile errore / da rivedere / OK-varianza
-- Indicazioni su preflop, call, raise, fold, river call e progetti
+```js
+export const PAYPAL_ME_USERNAME = 'giovannipoker';
+```
 
 
-## V2.5
+## V3.2
 
-- Carte nel tester formattate con simboli: ♥ ♦ ♣ ♠
-- Colori differenziati: cuori rosso, quadri celeste, fiori verde, picche bianco/nero
-
-
-## V2.6
-
-- Layout desktop più largo
-- Hand History Analyzer su due colonne quando lo schermo è grande
-- Pagine meno schiacciate al centro
-- Pannelli più spaziosi
+- Donazione/supporto modificato da €5 a €2
 
 
-## V2.7
+## V3.3
 
-- Patch full width reale su desktop
-- Rimossi i limiti visivi che tenevano l'app schiacciata al centro
-- Hand History Analyzer e pagine principali usano tutta la larghezza disponibile
-
-
-## V2.8
-
-- Testi più commerciali e chiari
-- Rinominato Tester HH in Analizza Mani
-- Aggiunte pagine About e Contatti
-- Home focalizzata sulla promessa: errore vs sfortuna/varianza
-- Output mano per mano più leggibile
+- Rimossi riferimenti a piattaforme specifiche
+- Testi aggiornati con dicitura generica: software di gioco / hand history scaricabili dai software di gioco
+- Chiarito che l’analisi è solo post-sessione e non live
 
 
-## V2.9
+## V3.4
 
-- Ripulite Guide: rimosso testo placeholder sui contenuti SEO
-- Ripulita pagina Leak Finder: rimosso pricing grezzo con importi
-- Inserito modello futuro più professionale
+- Pagina Contatti ripulita
+- Rimossi blocchi “Email di contatto” e “Cosa testare adesso”
+- Lasciati campi vuoti placeholder
+
+
+## V3.5
+
+- PayPal.Me configurato
+- Username: gt17pp
+- Importo supporto: €2
+- Link generato: https://paypal.me/gt17pp/2EUR
+
+
+## V3.6
+
+- Blackjack riaggiunto nel menu
+- Trainer blackjack migliorato con selezione visiva delle carte
+- UI più curata, in stile coerente con il poker calculator
+
+
+## V3.7
+
+- Blackjack aggiornato con carte universali
+- Rimossi i semi singoli dalla UI blackjack
+- Aggiunta grafica con i 4 simboli delle carte solo nella sezione blackjack
+
+
+## V3.8
+
+- Restyling delle carte nella sezione Poker Odds
+- Carte più simili a un mazzo reale: indici agli angoli e centro più elegante
+- Selettore carte aggiornato con lo stesso stile
+
+
+## V3.9
+
+- Revisione testi pubblici in italiano
+- Pulizia pagina per pagina
+- J/Q/K del Poker Odds resi più premium
+- Mantenuta analisi post-sessione e nessuna assistenza live
+
+
+## V4.0
+
+- Banner home reso più accattivante con Pocket Aces e win rate 85.2%
+- Logo aggiornato a diamante verde con simbolo % nero
+- Riga introduttiva rimossa dalla pagina Contatti
+- FAQ aggiornata con domanda tecnica al posto della monetizzazione
+- Pagina Pot Odds migliorata con nota: equity stimabile dalla pagina Poker Odds
+
+
+## V4.2
+- logo aggiornato con fiore/club, simbolo % centrale e badge 99
+- hero banner trasformato in preview live di mani forti/speculative con odds che si aggiornano per street
+- barra navigazione con evidenze colore per Analizza Mani, Poker Odds, Pot Odds, Blackjack e Leak Finder
+
+
+## V4.3
+- Traduzioni ampliate su home, tool principali, pagine informative e menu
+- Selettore lingua con bandierine
+- Logo aggiornato: carta + simbolo % sopra, sia header/home sia favicon
+
+
+## V4.6
+
+- Rebuilt Hand History Tester for better stability
+- Supports #Game No hand history format
+- Handles comma-separated cards like [ Kd, Kh ]
+- Limits rendered hands to improve performance and avoid black screen
+
+
+## V5.0
+- Full polish pass on language selector with real flag SVG buttons
+- Tester page copy refined in all supported languages
+- Tester upload readability fix: panels remain dark and readable after loading hand-history files
+- Future model kept as two cards: free online mode and future paid PC download

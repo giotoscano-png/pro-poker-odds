@@ -71,10 +71,10 @@ export default function PokerCalculator() {
     };
   }, [runCalculation]);
 
-  const stage = communityCards.length === 0 ? 'Pre-Flop'
-    : communityCards.length <= 3 ? 'Flop'
-    : communityCards.length === 4 ? 'Turn'
-    : 'River';
+  const stage = communityCards.length === 0 ? t('preflopLabel')
+    : communityCards.length <= 3 ? t('flopLabel')
+    : communityCards.length === 4 ? t('turnLabel')
+    : t('riverLabel');
 
   return (
     <section className="page-card">
@@ -84,7 +84,7 @@ export default function PokerCalculator() {
           <h2>{t('pokerTitle')}</h2>
           <p>{t('pokerText')}</p>
         </div>
-        <button className="icon-button" onClick={resetAll} aria-label="Reset">
+        <button className="icon-button" onClick={resetAll} aria-label={t('resetLabel')}>
           <RotateCcw size={18} />
         </button>
       </div>
@@ -132,7 +132,7 @@ export default function PokerCalculator() {
         </div>
 
         <div className="stage-row">
-          {['Pre-Flop', 'Flop', 'Turn', 'River'].map(label => (
+          {[t('preflopLabel'), t('flopLabel'), t('turnLabel'), t('riverLabel')].map(label => (
             <span key={label} className={label === stage ? 'stage active' : 'stage'}>
               {label}
             </span>

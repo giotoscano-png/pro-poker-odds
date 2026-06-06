@@ -6,7 +6,6 @@ import { useLanguage } from '../../i18n.jsx';
 const RANKS = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
 const SUIT_SYMBOLS = ['♠', '♥', '♦', '♣'];
 
-
 export default function CardSelector({ open, onClose, onSelect, usedCards = [] }) {
   const [selectedSuit, setSelectedSuit] = useState(0);
   const { t } = useLanguage();
@@ -45,9 +44,11 @@ export default function CardSelector({ open, onClose, onSelect, usedCards = [] }
           ))}
         </div>
 
-        <div className="selector-grid">
+        <div className="selector-grid poker-grid">
           {RANKS.map((rankLabel, rankIdx) => {
             const used = isUsed(rankIdx, selectedSuit);
+            const cls = suitClass(selectedSuit);
+            const suit = SUIT_SYMBOLS[selectedSuit];
             return (
               <motion.button
                 key={rankIdx}
@@ -56,14 +57,23 @@ export default function CardSelector({ open, onClose, onSelect, usedCards = [] }
                 initial={{ opacity: 0, scale: 0.85 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: rankIdx * 0.015 }}
-                className={used ? 'selector-card disabled' : 'selector-card'}
+                className={used ? 'selector-card poker-selector-card disabled' : 'selector-card poker-selector-card'}
                 onClick={() => {
                   onSelect({ rank: rankIdx, suit: selectedSuit });
                   onClose();
                 }}
               >
-                <span className={suitClass(selectedSuit)}>{rankLabel}</span>
-                <span className={suitClass(selectedSuit)}>{SUIT_SYMBOLS[selectedSuit]}</span>
+                <div className="corner-index top-left compact">
+                  <span className={`corner-rank ${cls}`}>{rankLabel}</span>
+                  <span className={`corner-suit ${cls}`}>{suit}</span>
+                </div>
+                <div className="poker-card-center compact">
+                  <MiniCardCenter rank={rankLabel} suit={suit} suitClass={cls} />
+                </div>
+                <div className="corner-index bottom-right compact">
+                  <span className={`corner-rank ${cls}`}>{rankLabel}</span>
+                  <span className={`corner-suit ${cls}`}>{suit}</span>
+                </div>
               </motion.button>
             );
           })}
@@ -71,4 +81,17 @@ export default function CardSelector({ open, onClose, onSelect, usedCards = [] }
       </motion.div>
     </div>
   );
+}
+
+function MiniCardCenter({ rank, suit, suitClass }) {
+  if (rank === 'A') return <span className={`ace-suit compact ${suitClass}`}>{suit}</span>;
+  if (['J', 'Q', 'K'].includes(rank)) {
+    return (
+      <div className={`face-illustration mini ${suitClass}`}>
+        <div className="face-crown">{rank === 'J' ? '♞' : rank === 'Q' ? '◆' : '♛'}</div>
+        <div className="face-letter">{rank}</div>
+      </div>
+    );
+  }
+  return <span className={`mini-pip ${suitClass}`}>{suit}</span>;
 }

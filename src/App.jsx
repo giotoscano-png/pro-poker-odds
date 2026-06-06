@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Spade, Calculator, ShieldCheck, BookOpen, MonitorDown, Home, Scale, BadgeInfo, Menu, X, Brain } from 'lucide-react';
+import { Spade, Calculator, ShieldCheck, BookOpen, MonitorDown, Home, Scale, BadgeInfo, Menu, X, Brain, HelpCircle, GraduationCap, Heart } from 'lucide-react';
 import HomePage from './pages/HomePage.jsx';
 import PokerCalculator from './pages/PokerCalculator.jsx';
 import PotOddsCalculator from './pages/PotOddsCalculator.jsx';
@@ -10,19 +10,26 @@ import HandHistoryTester from './pages/HandHistoryTester.jsx';
 import LegalPage from './pages/LegalPage.jsx';
 import AboutPage from './pages/AboutPage.jsx';
 import ContactPage from './pages/ContactPage.jsx';
+import FAQPage from './pages/FAQPage.jsx';
+import StrategyPage from './pages/StrategyPage.jsx';
+import SupportPage from './pages/SupportPage.jsx';
+import SupportButton from './components/SupportButton.jsx';
 import { LanguageProvider, useLanguage } from './i18n.jsx';
 
 const pages = [
-  { id: 'home', labelKey: 'navHome', icon: Home },
-  { id: 'poker', labelKey: 'navPoker', icon: Spade },
-  { id: 'potodds', labelKey: 'navPotOdds', icon: Calculator },
-  { id: 'blackjack', labelKey: 'navBlackjack', icon: ShieldCheck },
-  { id: 'guides', labelKey: 'navGuides', icon: BookOpen },
-  { id: 'tester', labelKey: 'navTester', icon: Brain },
-  { id: 'desktop', labelKey: 'navDesktop', icon: MonitorDown },
-  { id: 'about', labelKey: 'navAbout', icon: BookOpen },
-  { id: 'contact', labelKey: 'navContact', icon: BadgeInfo },
-  { id: 'legal', labelKey: 'navLegal', icon: Scale },
+  { id: 'home', labelKey: 'navHome', fallback: 'Home', icon: Home },
+  { id: 'tester', labelKey: 'navTester', fallback: 'Analizza Mani', icon: Brain, navClass: 'nav-spot-green' },
+  { id: 'poker', labelKey: 'navPoker', fallback: 'Poker Odds', icon: Spade, navClass: 'nav-spot-red' },
+  { id: 'potodds', labelKey: 'navPotOdds', fallback: 'Pot Odds', icon: Calculator, navClass: 'nav-spot-red' },
+  { id: 'blackjack', labelKey: 'navBlackjack', fallback: 'Blackjack', icon: ShieldCheck, navClass: 'nav-spot-blue' },
+  { id: 'strategy', labelKey: 'navStrategy', fallback: 'Strategia', icon: GraduationCap },
+  { id: 'guides', labelKey: 'navGuides', fallback: 'Guide', icon: BookOpen },
+  { id: 'desktop', labelKey: 'navDesktop', fallback: 'Leak Finder', icon: MonitorDown, navClass: 'nav-spot-purple' },
+  { id: 'faq', labelKey: 'navFAQ', fallback: 'FAQ', icon: HelpCircle },
+  { id: 'about', labelKey: 'navAbout', fallback: 'About', icon: BookOpen },
+  { id: 'support', labelKey: 'navSupport', fallback: 'Supporta', icon: Heart },
+  { id: 'contact', labelKey: 'navContact', fallback: 'Contatti', icon: BadgeInfo },
+  { id: 'legal', labelKey: 'navLegal', fallback: 'Disclaimer', icon: Scale },
 ];
 
 export default function App() {
@@ -38,15 +45,26 @@ function AppContent() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const { language, setLanguage, languages, t } = useLanguage();
 
+  const languageFlags = {
+    it: '/flags/it.svg',
+    en: '/flags/gb.svg',
+    es: '/flags/es.svg',
+    fr: '/flags/fr.svg',
+    de: '/flags/de.svg',
+  };
+
   const CurrentPage = {
     home: HomePage,
+    tester: HandHistoryTester,
     poker: PokerCalculator,
     potodds: PotOddsCalculator,
     blackjack: BlackjackTrainer,
+    strategy: StrategyPage,
     guides: GuidesPage,
-    tester: HandHistoryTester,
     desktop: DesktopPage,
+    faq: FAQPage,
     about: AboutPage,
+    support: SupportPage,
     contact: ContactPage,
     legal: LegalPage,
   }[page];
@@ -61,8 +79,10 @@ function AppContent() {
     <div className="app-shell">
       <header className="topbar">
         <button className="brand" onClick={() => goTo('home')}>
-          <div className="brand-icon">
-            <Spade size={18} />
+          <div className="brand-icon card-percent-logo" aria-hidden="true">
+            <span className="brand-card-rank">A</span>
+            <span className="brand-card-suit">♠</span>
+            <span className="brand-percent">%</span>
           </div>
           <div>
             <h1>PRO Poker Odds</h1>
@@ -73,21 +93,36 @@ function AppContent() {
         <nav className="desktop-nav">
           {pages.map(item => {
             const Icon = item.icon;
+            const label = t(item.labelKey);
             return (
-              <button key={item.id} className={page === item.id ? 'nav-active' : ''} onClick={() => goTo(item.id)}>
+              <button
+                key={item.id}
+                className={`${page === item.id ? 'nav-active' : ''} ${item.navClass || ''}`.trim()}
+                onClick={() => goTo(item.id)}
+              >
                 <Icon size={15} />
-                {t(item.labelKey)}
+                {label === item.labelKey ? item.fallback : label}
               </button>
             );
           })}
         </nav>
 
         <div className="header-actions">
-          <select className="language-select" value={language} onChange={(e) => setLanguage(e.target.value)} aria-label="Language">
+          <SupportButton compact />
+          <div className="language-select-wrap" aria-label="Language selector">
             {Object.entries(languages).map(([code, label]) => (
-              <option key={code} value={code}>{label}</option>
+              <button
+                key={code}
+                type="button"
+                className={`language-flag-btn ${language === code ? 'active' : ''}`.trim()}
+                onClick={() => setLanguage(code)}
+                title={label}
+                aria-label={label}
+              >
+                <img src={languageFlags[code]} alt={label} className="language-flag-img" />
+              </button>
             ))}
-          </select>
+          </div>
 
           <button className="mobile-menu" onClick={() => setMobileOpen(v => !v)}>
             {mobileOpen ? <X size={20} /> : <Menu size={20} />}
@@ -99,10 +134,15 @@ function AppContent() {
         <div className="mobile-nav">
           {pages.map(item => {
             const Icon = item.icon;
+            const label = t(item.labelKey);
             return (
-              <button key={item.id} className={page === item.id ? 'nav-active' : ''} onClick={() => goTo(item.id)}>
+              <button
+                key={item.id}
+                className={`${page === item.id ? 'nav-active' : ''} ${item.navClass || ''}`.trim()}
+                onClick={() => goTo(item.id)}
+              >
                 <Icon size={16} />
-                {t(item.labelKey)}
+                {label === item.labelKey ? item.fallback : label}
               </button>
             );
           })}
@@ -119,9 +159,17 @@ function AppContent() {
           <span>{t('footerText')}</span>
         </div>
         <div className="footer-actions">
+          <button onClick={() => goTo('support')}>
+            <Heart size={14} />
+            {t('supportCompact', { amount: 2 })}
+          </button>
+          <button onClick={() => goTo('faq')}>
+            <HelpCircle size={14} />
+            {t('navFAQ')}
+          </button>
           <button onClick={() => goTo('contact')}>
             <BadgeInfo size={14} />
-            Contatti
+            {t('navContact')}
           </button>
           <button onClick={() => goTo('legal')}>
             <BadgeInfo size={14} />
