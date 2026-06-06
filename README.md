@@ -1,63 +1,50 @@
-# PRO Poker Odds V2
+import React from 'react';
+import { motion } from 'framer-motion';
+import { TrendingUp, Minus, TrendingDown, Trophy } from 'lucide-react';
+import { useLanguage } from '../../i18n.jsx';
 
-Versione V2 della web app gratuita.
+export default function OddsDisplay({ odds, isCalculating }) {
+  const { t } = useLanguage();
+  if (!odds && !isCalculating) return null;
 
-## Novità V2
+  return (
+    <div className="odds-stack">
+      {odds?.currentHandName && (
+        <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="current-hand">
+          <Trophy size={16} />
+          <span>{odds.currentHandName}</span>
+        </motion.div>
+      )}
 
-- Home professionale
-- Poker odds calculator
-- Pot odds calculator
-- Blackjack trainer
-- Pagina Guide
-- Pagina Disclaimer / Privacy
-- Pagina Poker Leak Finder / PC App coming soon
-- Favicon incluso
-- Nessuna dipendenza da Base44
+      <OddsBar label={t('win')} value={odds?.win || 0} tone="win" icon={<TrendingUp size={16} />} isCalculating={isCalculating} />
+      <OddsBar label={t('tie')} value={odds?.tie || 0} tone="tie" icon={<Minus size={16} />} isCalculating={isCalculating} />
+      <OddsBar label={t('loss')} value={odds?.lose || 0} tone="loss" icon={<TrendingDown size={16} />} isCalculating={isCalculating} />
+    </div>
+  );
+}
 
-## Avvio locale
+function OddsBar({ label, value, tone, icon, isCalculating }) {
+  const numValue = parseFloat(value) || 0;
 
-```bash
-npm install
-npm run dev
-```
-
-## Build
-
-```bash
-npm run build
-```
-
-Solo uso educativo. Nessun gioco con denaro reale. Nessuna assistenza live.
-
-
-## V2.1
-
-- Selettore lingua: Italiano, English, Français, Español
-- Italiano impostato come lingua predefinita
-
-
-## V2.2 Fixed
-
-- Fix pagina Blackjack e PC App che diventavano nere
-- Testi italiani rifiniti come base
-- Build testata con `npm run build`
-
-
-## V2.3
-
-- Aggiunta pagina Hand History Tester
-- Upload / paste hand history .txt
-- Mini analisi demo post-sessione per preparare la futura app PC
-
-
-## V2.4
-
-- Hand History Analyzer mano per mano
-- Prima classificazione: possibile errore / da rivedere / OK-varianza
-- Indicazioni su preflop, call, raise, fold, river call e progetti
-
-
-## V2.5
-
-- Carte nel tester formattate con simboli: ♥ ♦ ♣ ♠
-- Colori differenziati: cuori rosso, quadri celeste, fiori verde, picche bianco/nero
+  return (
+    <div className={`odds-bar ${tone}`}>
+      <div className="odds-line">
+        <div className="odds-label">
+          {icon}
+          <span>{label}</span>
+        </div>
+        <motion.strong key={value} initial={{ scale: 1.25, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}>
+          {isCalculating ? '...' : `${Number(value || 0).toFixed(1)}%`}
+        </motion.strong>
+      </div>
+      <div className="bar-track">
+        <motion.div
+          className="bar-fill"
+          initial={{ width: 0 }}
+          animate={{ width: `${numValue}%` }}
+          transition={{ duration: 0.75, ease: 'easeOut' }}
+        />
+      </div>
+    </div>
+  );
+}
