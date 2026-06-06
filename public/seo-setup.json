@@ -1,0 +1,9 @@
+{
+  "site": "PRO Poker Odds",
+  "canonical_url": "https://pro-poker-odds.vercel.app/",
+  "sitemap": "https://pro-poker-odds.vercel.app/sitemap.xml",
+  "robots": "https://pro-poker-odds.vercel.app/robots.txt",
+  "note": "Current routing uses #/ hash routes. For stronger SEO later, migrate guide pages to clean static paths without #.",
+  "search_console_property_type": "URL prefix",
+  "recommended_property": "https://pro-poker-odds.vercel.app/"
+}

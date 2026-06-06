@@ -213,3 +213,38 @@ export const PAYPAL_ME_USERNAME = 'giovannipoker';
 - Fully translated all SEO guide pages in IT / EN / ES / FR / DE
 - Removed English fallback for Spanish, French and German guide bodies
 - Translated sections, takeaways, CTAs and keywords for every guide
+
+
+## V5.5 SEO Technical Pack
+
+Added:
+- `public/robots.txt`
+- `public/sitemap.xml`
+- `public/seo-setup.json`
+- improved meta title and meta description in `index.html`
+- Open Graph / Twitter preview tags
+- Vercel content-type/cache headers for `robots.txt` and `sitemap.xml`
+
+### Google Search Console setup
+
+1. Open Google Search Console.
+2. Add property using **URL prefix**.
+3. Use this property URL:
+   `https://pro-poker-odds.vercel.app/`
+4. Choose verification by **HTML tag**.
+5. Google will give you a tag like:
+   `<meta name="google-site-verification" content="YOUR_CODE_HERE" />`
+6. Paste that tag inside `index.html`, inside `<head>`, near the existing Google Search Console comment.
+7. Deploy again.
+8. Go back to Search Console and click **Verify**.
+9. Open **Sitemaps** and submit:
+   `sitemap.xml`
+
+### Important SEO note
+
+The current website uses hash routes like `#/guides/pot-odds-explained`.
+These are fine for users and sharing links, but not ideal for strong Google SEO.
+For stronger indexing later, migrate guides to clean URLs such as:
+- `/guides/pot-odds-explained`
+- `/guides/flush-draw-odds`
+- `/tools/poker-odds`
