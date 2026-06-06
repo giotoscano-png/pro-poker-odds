@@ -261,3 +261,13 @@ After deployment, verify that this URL opens:
 `https://pro-poker-odds.vercel.app/google969e34e2ec52b7b4.html`
 
 Then go back to Google Search Console and click **Verify**.
+
+
+## V5.5.2 Sitemap Hotfix
+
+- Fixed sitemap XML namespace to the canonical sitemap protocol namespace:
+  `http://www.sitemaps.org/schemas/sitemap/0.9`
+- Keep submitting the sitemap in Google Search Console as:
+  `sitemap.xml`
+  without a leading slash.
+- If a previous `/sitemap.xml` submission shows "Could not fetch", submit `sitemap.xml` again after deployment and wait. Google Search Console may need time to refresh.
