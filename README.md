@@ -207,3 +207,9 @@ export const PAYPAL_ME_USERNAME = 'giovannipoker';
 - Added missing guide routes to routePages map
 - Guide cards now use direct hash anchors without preventDefault
 - Direct guide URLs and guide card clicks now resolve to the correct SeoGuidePage
+
+
+## V5.4.3 Full Guide Translations
+- Fully translated all SEO guide pages in IT / EN / ES / FR / DE
+- Removed English fallback for Spanish, French and German guide bodies
+- Translated sections, takeaways, CTAs and keywords for every guide
