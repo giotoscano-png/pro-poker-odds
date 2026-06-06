@@ -271,3 +271,13 @@ Then go back to Google Search Console and click **Verify**.
   `sitemap.xml`
   without a leading slash.
 - If a previous `/sitemap.xml` submission shows "Could not fetch", submit `sitemap.xml` again after deployment and wait. Google Search Console may need time to refresh.
+
+
+## V5.5.3 Sitemap Clean
+
+- Rewrote `public/sitemap.xml` from scratch with a clean XML sitemap.
+- Added `public/sitemap-google.xml` as an alternate fresh sitemap name for Google Search Console.
+- Updated `robots.txt` to reference both sitemap files.
+
+If `/sitemap.xml` remains red in Search Console because of cache, submit:
+`sitemap-google.xml`
