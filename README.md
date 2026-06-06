@@ -172,3 +172,11 @@ export const PAYPAL_ME_USERNAME = 'giovannipoker';
   - #/guides
   - #/support
 - Keeps Vercel deployment simple and safe without server rewrites
+
+
+## V5.3 Final Public Polish
+- Final translation polish for home live banner, About, Legal, Contact and key public pages
+- Improved footer layout and button alignment
+- Premium polish for header, cards and inner pages
+- Contact page upgraded while keeping the form non-sending/simple
+- Routing, security headers and tester privacy note preserved
