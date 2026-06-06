@@ -150,3 +150,12 @@ export const PAYPAL_ME_USERNAME = 'giovannipoker';
 - Tester page copy refined in all supported languages
 - Tester upload readability fix: panels remain dark and readable after loading hand-history files
 - Future model kept as two cards: free online mode and future paid PC download
+
+
+## V5.1 Security
+- Added Vercel security headers through vercel.json
+- Added Content Security Policy, anti-clickjacking and no-sniff headers
+- Added local-only hand-history privacy note
+- Added 2 MB hand-history file size guard
+- Added basic security.txt placeholder
+- Ran basic secret-pattern scan before packaging

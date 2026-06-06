@@ -3,6 +3,7 @@ import { Upload, FileText, Brain, AlertTriangle, CheckCircle2, Copy, Trash2, XCi
 import { useLanguage } from '../i18n.jsx';
 
 const MAX_HANDS_TO_ANALYZE = 150;
+const MAX_FILE_SIZE_BYTES = 2 * 1024 * 1024;
 
 const SAMPLE_HANDS = `#Game No : 141748680
 ***** Hand History for Game 141748680 *****
@@ -75,6 +76,7 @@ export default function HandHistoryTester() {
   const { t } = useLanguage();
   const [rawText, setRawText] = useState('');
   const [fileName, setFileName] = useState('');
+  const [fileError, setFileError] = useState('');
 
   const analysis = useMemo(() => {
     try {
@@ -86,11 +88,13 @@ export default function HandHistoryTester() {
   }, [rawText, t]);
 
   const loadSample = () => {
+    setFileError('');
     setRawText(SAMPLE_HANDS);
     setFileName('sample-hands.txt');
   };
 
   const clearAll = () => {
+    setFileError('');
     setRawText('');
     setFileName('');
   };
@@ -98,6 +102,15 @@ export default function HandHistoryTester() {
   const handleFile = async (event) => {
     const file = event.target.files?.[0];
     if (!file) return;
+
+    setFileError('');
+
+    if (file.size > MAX_FILE_SIZE_BYTES) {
+      setFileName(file.name);
+      setRawText('');
+      setFileError(t('fileTooLarge', { maxMb: 2 }));
+      return;
+    }
 
     setFileName(file.name);
 
@@ -107,6 +120,7 @@ export default function HandHistoryTester() {
     } catch (error) {
       console.error('File read error:', error);
       setRawText('');
+      setFileError(t('fileReadError'));
     }
   };
 
@@ -132,6 +146,18 @@ export default function HandHistoryTester() {
             <div className="loaded-file">
               <FileText size={16} />
               <span>{fileName}</span>
+            </div>
+          )}
+
+          <div className="privacy-note">
+            <AlertTriangle size={16} />
+            <span>{t('testerPrivacyNote')}</span>
+          </div>
+
+          {fileError && (
+            <div className="privacy-note error">
+              <XCircle size={16} />
+              <span>{fileError}</span>
             </div>
           )}
 

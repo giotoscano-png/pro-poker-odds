@@ -1055,6 +1055,39 @@ Object.entries(overlayTranslations).forEach(([lang, values]) => {
   translations[lang] = { ...(translations[lang] || {}), ...values };
 });
 
+
+const securityTranslations = {
+  it: {
+    testerPrivacyNote: 'Privacy: il file viene letto localmente nel browser. Non viene caricato su server e non viene salvato da PRO Poker Odds.',
+    fileTooLarge: 'File troppo grande. Carica un file fino a {maxMb} MB oppure dividi la hand history in più file.',
+    fileReadError: 'Errore nella lettura del file. Prova con un file .txt o .log esportato in formato testo semplice.',
+  },
+  en: {
+    testerPrivacyNote: 'Privacy: the file is read locally in your browser. It is not uploaded to a server and is not stored by PRO Poker Odds.',
+    fileTooLarge: 'File too large. Upload a file up to {maxMb} MB or split the hand history into smaller files.',
+    fileReadError: 'File read error. Try a .txt or .log file exported as plain text.',
+  },
+  es: {
+    testerPrivacyNote: 'Privacidad: el archivo se lee localmente en tu navegador. No se sube a un servidor y PRO Poker Odds no lo guarda.',
+    fileTooLarge: 'Archivo demasiado grande. Sube un archivo de hasta {maxMb} MB o divide la hand history en varios archivos.',
+    fileReadError: 'Error al leer el archivo. Prueba con un archivo .txt o .log exportado como texto simple.',
+  },
+  fr: {
+    testerPrivacyNote: 'Confidentialité : le fichier est lu localement dans ton navigateur. Il n’est pas envoyé à un serveur et n’est pas stocké par PRO Poker Odds.',
+    fileTooLarge: 'Fichier trop volumineux. Importe un fichier jusqu’à {maxMb} Mo ou divise la hand history en plusieurs fichiers.',
+    fileReadError: 'Erreur de lecture du fichier. Essaie avec un fichier .txt ou .log exporté en texte simple.',
+  },
+  de: {
+    testerPrivacyNote: 'Datenschutz: Die Datei wird lokal in deinem Browser gelesen. Sie wird nicht auf einen Server hochgeladen und nicht von PRO Poker Odds gespeichert.',
+    fileTooLarge: 'Datei zu groß. Lade eine Datei bis {maxMb} MB hoch oder teile die Hand History in mehrere Dateien auf.',
+    fileReadError: 'Fehler beim Lesen der Datei. Versuche es mit einer .txt- oder .log-Datei im Klartextformat.',
+  }
+};
+
+Object.entries(securityTranslations).forEach(([lang, values]) => {
+  translations[lang] = { ...(translations[lang] || {}), ...values };
+});
+
 function interpolate(value, vars = {}) {
   if (typeof value !== 'string') return value;
   return value.replace(/\{(\w+)\}/g, (_, key) => (vars[key] ?? `{${key}}`));

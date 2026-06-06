@@ -2778,3 +2778,46 @@ code {
   border-radius: 3px;
   box-shadow: 0 0 0 1px rgba(255,255,255,.22), 0 6px 12px rgba(0,0,0,.22);
 }
+
+
+/* V5.1 security/privacy polish */
+.privacy-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  border: 1px solid rgba(96,165,250,.20);
+  background: rgba(96,165,250,.075);
+  color: var(--muted);
+  border-radius: 14px;
+  padding: 10px 12px;
+  line-height: 1.45;
+  font-size: 12px;
+}
+
+.privacy-note svg {
+  flex: 0 0 auto;
+  color: var(--accent);
+  margin-top: 1px;
+}
+
+.privacy-note.error {
+  border-color: rgba(251,113,133,.30);
+  background: rgba(251,113,133,.085);
+  color: #fecdd3;
+}
+
+.privacy-note.error svg {
+  color: var(--danger);
+}
+
+/* Extra upload readability hardening */
+.page-card.wide-page .hand-review-list {
+  background: transparent !important;
+}
+
+.page-card.wide-page .hand-card,
+.page-card.wide-page .hand-card.good,
+.page-card.wide-page .hand-card.review,
+.page-card.wide-page .hand-card.mistake {
+  color: var(--text) !important;
+}
