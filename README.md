@@ -201,3 +201,9 @@ export const PAYPAL_ME_USERNAME = 'giovannipoker';
 - Fixed guide routes in routePages map
 - Guide cards now navigate correctly to dedicated guide pages
 - Guide cards also use hash hrefs for robust direct routing
+
+
+## V5.4.2 Definitive Guides Routing Fix
+- Added missing guide routes to routePages map
+- Guide cards now use direct hash anchors without preventDefault
+- Direct guide URLs and guide card clicks now resolve to the correct SeoGuidePage

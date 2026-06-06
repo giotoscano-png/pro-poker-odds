@@ -69,6 +69,12 @@ const routePages = {
   '/strategia': 'strategy',
   '/guides': 'guides',
   '/guide': 'guides',
+  '/guides/pot-odds-explained': 'guidePotOdds',
+  '/guides/poker-equity-explained': 'guideEquity',
+  '/guides/flush-draw-odds': 'guideFlushDraw',
+  '/guides/straight-draw-odds': 'guideStraightDraw',
+  '/guides/top-10-poker-mistakes': 'guideMistakes',
+  '/guides/blackjack-hit-or-stand': 'guideBlackjack',
   '/leak-finder': 'desktop',
   '/desktop': 'desktop',
   '/faq': 'faq',
@@ -81,17 +87,24 @@ const routePages = {
   '/disclaimer': 'legal',
 };
 
+
 function normalizeHashRoute(hash) {
-  const raw = (hash || '').replace(/^#/, '').trim();
+  const raw = String(hash || '').replace(/^#/, '').trim();
   if (!raw || raw === '/') return '/';
-  const withSlash = raw.startsWith('/') ? raw : `/${raw}`;
-  return withSlash.replace(/\/+$/, '') || '/';
+
+  const withoutQuery = raw.split('?')[0].split('&')[0];
+  const withSlash = withoutQuery.startsWith('/') ? withoutQuery : `/${withoutQuery}`;
+  const cleaned = withSlash.replace(/\/+$/, '');
+
+  return cleaned || '/';
 }
 
 function getPageFromHash() {
   if (typeof window === 'undefined') return 'home';
-  return routePages[normalizeHashRoute(window.location.hash)] || 'home';
+  const route = normalizeHashRoute(window.location.hash);
+  return routePages[route] || 'home';
 }
+
 
 export default function App() {
   return (
@@ -149,16 +162,16 @@ function AppContent() {
 
   const goTo = (id) => {
     const safeId = pageRoutes[id] ? id : 'home';
-    const nextHash = `#${pageRoutes[safeId]}`;
+    const route = pageRoutes[safeId];
 
     setPage(safeId);
     setMobileOpen(false);
 
-    if (window.location.hash !== nextHash) {
-      window.location.hash = pageRoutes[safeId];
+    if (window.location.hash !== `#${route}`) {
+      window.location.hash = route;
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (

@@ -12,16 +12,8 @@ const quickGuides = [
   { icon: ShieldCheck, title: 'learnBjTitle', body: 'learnBjText' },
 ];
 
-const guidePageIds = {
-  potOdds: 'guidePotOdds',
-  equity: 'guideEquity',
-  flushDraw: 'guideFlushDraw',
-  straightDraw: 'guideStraightDraw',
-  mistakes: 'guideMistakes',
-  blackjack: 'guideBlackjack',
-};
 
-export default function GuidesPage({ setPage }) {
+export default function GuidesPage() {
   const { t, language } = useLanguage();
   const seoGuides = seoGuideList(language);
 
@@ -43,10 +35,7 @@ export default function GuidesPage({ setPage }) {
             </div>
             <h3>{guide.title}</h3>
             <p>{guide.desc}</p>
-            <a href={`#${guide.route}`} className="seo-guide-link" onClick={(event) => {
-              event.preventDefault();
-              setPage(guidePageIds[guide.key]);
-            }}>
+            <a href={`#${guide.route}`} className="seo-guide-link">
               {t('readGuide')} <ArrowRight size={14} />
             </a>
           </article>
