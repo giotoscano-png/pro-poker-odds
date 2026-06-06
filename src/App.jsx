@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Spade, Calculator, ShieldCheck, BookOpen, MonitorDown, Home, Scale, BadgeInfo, Menu, X, Brain, HelpCircle, GraduationCap, Heart } from 'lucide-react';
 import HomePage from './pages/HomePage.jsx';
 import PokerCalculator from './pages/PokerCalculator.jsx';
@@ -32,6 +32,60 @@ const pages = [
   { id: 'legal', labelKey: 'navLegal', fallback: 'Disclaimer', icon: Scale },
 ];
 
+const pageRoutes = {
+  home: '/',
+  tester: '/analyze-hands',
+  poker: '/poker',
+  potodds: '/pot-odds',
+  blackjack: '/blackjack',
+  strategy: '/strategy',
+  guides: '/guides',
+  desktop: '/leak-finder',
+  faq: '/faq',
+  about: '/about',
+  support: '/support',
+  contact: '/contact',
+  legal: '/legal',
+};
+
+const routePages = {
+  '/': 'home',
+  '/home': 'home',
+  '/analyze-hands': 'tester',
+  '/analizza-mani': 'tester',
+  '/hand-review': 'tester',
+  '/poker': 'poker',
+  '/poker-odds': 'poker',
+  '/pot-odds': 'potodds',
+  '/blackjack': 'blackjack',
+  '/strategy': 'strategy',
+  '/strategia': 'strategy',
+  '/guides': 'guides',
+  '/guide': 'guides',
+  '/leak-finder': 'desktop',
+  '/desktop': 'desktop',
+  '/faq': 'faq',
+  '/about': 'about',
+  '/support': 'support',
+  '/supporta': 'support',
+  '/contact': 'contact',
+  '/contatti': 'contact',
+  '/legal': 'legal',
+  '/disclaimer': 'legal',
+};
+
+function normalizeHashRoute(hash) {
+  const raw = (hash || '').replace(/^#/, '').trim();
+  if (!raw || raw === '/') return '/';
+  const withSlash = raw.startsWith('/') ? raw : `/${raw}`;
+  return withSlash.replace(/\/+$/, '') || '/';
+}
+
+function getPageFromHash() {
+  if (typeof window === 'undefined') return 'home';
+  return routePages[normalizeHashRoute(window.location.hash)] || 'home';
+}
+
 export default function App() {
   return (
     <LanguageProvider>
@@ -41,9 +95,20 @@ export default function App() {
 }
 
 function AppContent() {
-  const [page, setPage] = useState('home');
+  const [page, setPage] = useState(() => getPageFromHash());
   const [mobileOpen, setMobileOpen] = useState(false);
   const { language, setLanguage, languages, t } = useLanguage();
+
+  useEffect(() => {
+    const syncPageFromHash = () => {
+      setPage(getPageFromHash());
+      setMobileOpen(false);
+    };
+
+    syncPageFromHash();
+    window.addEventListener('hashchange', syncPageFromHash);
+    return () => window.removeEventListener('hashchange', syncPageFromHash);
+  }, []);
 
   const languageFlags = {
     it: '/flags/it.svg',
@@ -67,11 +132,19 @@ function AppContent() {
     support: SupportPage,
     contact: ContactPage,
     legal: LegalPage,
-  }[page];
+  }[page] || HomePage;
 
   const goTo = (id) => {
-    setPage(id);
+    const safeId = pageRoutes[id] ? id : 'home';
+    const nextHash = `#${pageRoutes[safeId]}`;
+
+    setPage(safeId);
     setMobileOpen(false);
+
+    if (window.location.hash !== nextHash) {
+      window.location.hash = pageRoutes[safeId];
+    }
+
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 

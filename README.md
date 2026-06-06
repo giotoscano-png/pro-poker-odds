@@ -159,3 +159,16 @@ export const PAYPAL_ME_USERNAME = 'giovannipoker';
 - Added 2 MB hand-history file size guard
 - Added basic security.txt placeholder
 - Ran basic secret-pattern scan before packaging
+
+
+## V5.2 Routing
+- Added hash routing for direct shareable page links
+- Routes now include:
+  - #/poker
+  - #/pot-odds
+  - #/analyze-hands
+  - #/blackjack
+  - #/leak-finder
+  - #/guides
+  - #/support
+- Keeps Vercel deployment simple and safe without server rewrites
