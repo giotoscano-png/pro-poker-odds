@@ -1,7 +1,7 @@
 {
-  "name": "pro-poker-odds-clean",
+  "name": "pro-poker-odds-v2-i18n-fixed",
   "private": true,
-  "version": "1.0.0",
+  "version": "2.2.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
