@@ -183,7 +183,7 @@ function AppContent() {
             return (
               <button
                 key={item.id}
-                className={`${page === item.id ? 'nav-active' : ''} ${item.navClass || ''}`.trim()}
+                className={`${(page === item.id || (item.id === 'guides' && page.startsWith('guide'))) ? 'nav-active' : ''} ${item.navClass || ''}`.trim()}
                 onClick={() => goTo(item.id)}
               >
                 <Icon size={15} />
@@ -224,7 +224,7 @@ function AppContent() {
             return (
               <button
                 key={item.id}
-                className={`${page === item.id ? 'nav-active' : ''} ${item.navClass || ''}`.trim()}
+                className={`${(page === item.id || (item.id === 'guides' && page.startsWith('guide'))) ? 'nav-active' : ''} ${item.navClass || ''}`.trim()}
                 onClick={() => goTo(item.id)}
               >
                 <Icon size={16} />

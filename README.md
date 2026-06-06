@@ -195,3 +195,9 @@ export const PAYPAL_ME_USERNAME = 'giovannipoker';
 - Added CTA buttons from guide pages to relevant tools
 - Added dynamic document title and meta description updates for guide pages
 - Added guide copy in Italian and English, with localized ES/FR/DE titles and descriptions
+
+
+## V5.4.1 Guides Routing Hotfix
+- Fixed guide routes in routePages map
+- Guide cards now navigate correctly to dedicated guide pages
+- Guide cards also use hash hrefs for robust direct routing

@@ -43,9 +43,12 @@ export default function GuidesPage({ setPage }) {
             </div>
             <h3>{guide.title}</h3>
             <p>{guide.desc}</p>
-            <button onClick={() => setPage(guidePageIds[guide.key])}>
+            <a href={`#${guide.route}`} className="seo-guide-link" onClick={(event) => {
+              event.preventDefault();
+              setPage(guidePageIds[guide.key]);
+            }}>
               {t('readGuide')} <ArrowRight size={14} />
-            </button>
+            </a>
           </article>
         ))}
       </div>

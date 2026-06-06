@@ -3185,3 +3185,23 @@ code {
     display: none;
   }
 }
+
+
+.seo-guide-link {
+  border: 1px solid rgba(134,239,125,.24);
+  background: rgba(134,239,125,.08);
+  color: var(--primary);
+  border-radius: 999px;
+  padding: 10px 12px;
+  font-weight: 950;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  margin-top: 14px;
+  text-decoration: none;
+}
+.seo-guide-link:hover {
+  border-color: rgba(134,239,125,.40);
+  background: rgba(134,239,125,.12);
+}
