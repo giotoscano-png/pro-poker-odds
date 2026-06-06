@@ -248,3 +248,16 @@ For stronger indexing later, migrate guides to clean URLs such as:
 - `/guides/pot-odds-explained`
 - `/guides/flush-draw-odds`
 - `/tools/poker-odds`
+
+
+## V5.5.1 Google Verification
+
+Added Google Search Console HTML file verification:
+
+- `public/google969e34e2ec52b7b4.html`
+
+After deployment, verify that this URL opens:
+
+`https://pro-poker-odds.vercel.app/google969e34e2ec52b7b4.html`
+
+Then go back to Google Search Console and click **Verify**.
