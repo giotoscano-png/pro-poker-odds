@@ -8,6 +8,8 @@ import GuidesPage from './pages/GuidesPage.jsx';
 import DesktopPage from './pages/DesktopPage.jsx';
 import HandHistoryTester from './pages/HandHistoryTester.jsx';
 import LegalPage from './pages/LegalPage.jsx';
+import AboutPage from './pages/AboutPage.jsx';
+import ContactPage from './pages/ContactPage.jsx';
 import { LanguageProvider, useLanguage } from './i18n.jsx';
 
 const pages = [
@@ -18,6 +20,8 @@ const pages = [
   { id: 'guides', labelKey: 'navGuides', icon: BookOpen },
   { id: 'tester', labelKey: 'navTester', icon: Brain },
   { id: 'desktop', labelKey: 'navDesktop', icon: MonitorDown },
+  { id: 'about', labelKey: 'navAbout', icon: BookOpen },
+  { id: 'contact', labelKey: 'navContact', icon: BadgeInfo },
   { id: 'legal', labelKey: 'navLegal', icon: Scale },
 ];
 
@@ -42,6 +46,8 @@ function AppContent() {
     guides: GuidesPage,
     tester: HandHistoryTester,
     desktop: DesktopPage,
+    about: AboutPage,
+    contact: ContactPage,
     legal: LegalPage,
   }[page];
 
@@ -65,7 +71,7 @@ function AppContent() {
         </button>
 
         <nav className="desktop-nav">
-          {pages.slice(0, 6).map(item => {
+          {pages.map(item => {
             const Icon = item.icon;
             return (
               <button key={item.id} className={page === item.id ? 'nav-active' : ''} onClick={() => goTo(item.id)}>
@@ -112,10 +118,16 @@ function AppContent() {
           <strong>{t('footerStrong')}</strong>
           <span>{t('footerText')}</span>
         </div>
-        <button onClick={() => goTo('legal')}>
-          <BadgeInfo size={14} />
-          {t('footerLegal')}
-        </button>
+        <div className="footer-actions">
+          <button onClick={() => goTo('contact')}>
+            <BadgeInfo size={14} />
+            Contatti
+          </button>
+          <button onClick={() => goTo('legal')}>
+            <BadgeInfo size={14} />
+            {t('footerLegal')}
+          </button>
+        </div>
       </footer>
     </div>
   );

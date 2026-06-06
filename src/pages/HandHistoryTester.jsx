@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { Upload, FileText, Brain, AlertTriangle, CheckCircle2, Copy, Trash2, XCircle, Search } from 'lucide-react';
 import { useLanguage } from '../i18n.jsx';
 
-const SAMPLE_HANDS = `PokerStars Hand #1111111111: Hold'em No Limit (€0.01/€0.02 EUR) - 2026/06/06 21:15:22 CET
+const SAMPLE_HANDS = `PokerStars Mano #1111111111: Hold'em No Limit (€0.01/€0.02 EUR) - 2026/06/06 21:15:22 CET
 Table 'DemoTable' 6-max Seat #3 is the button
 Seat 1: Hero (€2.00 in chips)
 Seat 2: Player2 (€1.55 in chips)
@@ -31,7 +31,7 @@ Player2 collected €1.30 from pot
 Total pot €1.36 | Rake €0.06
 Board [Qh 7h 2c 3d 9s]
 
-PokerStars Hand #2222222222: Hold'em No Limit (€0.01/€0.02 EUR) - 2026/06/06 21:17:10 CET
+PokerStars Mano #2222222222: Hold'em No Limit (€0.01/€0.02 EUR) - 2026/06/06 21:17:10 CET
 Table 'DemoTable' 6-max Seat #5 is the button
 Seat 1: Hero (€2.10 in chips)
 Seat 2: Player2 (€1.80 in chips)
@@ -161,11 +161,11 @@ export default function HandHistoryTester() {
     <section className="page-card wide-page">
       <div className="section-header">
         <div>
-          <span className="eyebrow"><Brain size={14} /> Tester programma PC</span>
-          <h2>Hand History Analyzer</h2>
+          <span className="eyebrow"><Brain size={14} /> Analisi mani giocate</span>
+          <h2>Analizza le tue mani</h2>
           <p>
-            Incolla o carica una hand history e il tester prova ad analizzare ogni mano separatamente,
-            evidenziando possibili errori, spot corretti e situazioni di varianza.
+            Carica una hand history PokerStars/888 e ricevi una prima review mano per mano: dove potresti aver sbagliato,
+            quali spot sono solo da rivedere e quali possono essere varianza o cooler.
           </p>
         </div>
       </div>
@@ -174,7 +174,7 @@ export default function HandHistoryTester() {
         <div className="panel form-panel">
           <label className="file-upload">
             <Upload size={18} />
-            <span>Carica file .txt / .log</span>
+            <span>Carica hand history .txt / .log</span>
             <input type="file" accept=".txt,.log" onChange={handleFile} />
           </label>
 
@@ -186,7 +186,7 @@ export default function HandHistoryTester() {
           )}
 
           <label>
-            Oppure incolla qui una o più hand history
+            Oppure incolla qui una o più mani
             <textarea
               className="hh-textarea"
               value={rawText}
@@ -209,7 +209,7 @@ export default function HandHistoryTester() {
           <div className="verdict neutral">
             <Brain size={26} />
             <div>
-              <span>Risultato sessione</span>
+              <span>Report sessione</span>
               <strong>{analysis.status}</strong>
             </div>
           </div>
@@ -227,7 +227,7 @@ export default function HandHistoryTester() {
           </div>
 
           <div className="hand-review-list">
-            <h3>Analisi mano per mano</h3>
+            <h3>Review mano per mano</h3>
             {analysis.hands.length === 0 ? (
               <p className="muted-text">Carica una hand history per vedere la review.</p>
             ) : (
@@ -240,8 +240,7 @@ export default function HandHistoryTester() {
           <div className="explain-box">
             <AlertTriangle size={18} />
             <p>
-              Questo non è ancora un solver: è una prima review euristica. La futura versione PC dovrà calcolare equity,
-              pot odds e range in modo più preciso, sempre post-sessione e senza assistenza live.
+              Questa è una review preliminare, non un solver. La futura versione PC dovrà calcolare equity, pot odds e range in modo più preciso, sempre post-sessione e senza assistenza live.
             </p>
           </div>
         </div>
@@ -316,7 +315,7 @@ function analyzeSession(text) {
   const good = hands.filter(h => h.verdict === 'good').length;
 
   return {
-    status: 'Analisi pronta',
+    status: 'Review pronta',
     totalHands: hands.length,
     mistakes,
     review,
@@ -328,7 +327,7 @@ function analyzeSession(text) {
 
 function splitHands(text) {
   const normalized = text.replace(/\r\n/g, '\n');
-  const parts = normalized.split(/(?=PokerStars Hand #|888poker Hand #|Hand #\d+)/g)
+  const parts = normalized.split(/(?=PokerStars Mano #|888poker Mano #|Mano #\d+)/g)
     .map(p => p.trim())
     .filter(Boolean);
 
@@ -337,7 +336,7 @@ function splitHands(text) {
 
 function parseHand(chunk) {
   const lines = chunk.split('\n').map(l => l.trim()).filter(Boolean);
-  const handId = chunk.match(/(?:PokerStars Hand #|888poker Hand #|Hand #)(\d+)/i)?.[1] || '';
+  const handId = chunk.match(/(?:PokerStars Mano #|888poker Mano #|Mano #)(\d+)/i)?.[1] || '';
   const heroName = chunk.match(/Dealt to (.+?) \[/i)?.[1] || 'Hero';
   const rawHeroCards = chunk.match(/Dealt to .+?\s+\[([^\]]+)\]/i)?.[1] || '';
   const rawBoard = chunk.match(/Board \[([^\]]+)\]/i)?.[1] || getBoardFromStreets(chunk);
@@ -369,8 +368,8 @@ function parseHand(chunk) {
     score -= 3;
     reasons.push({
       type: 'bad',
-      title: 'Possibile errore preflop',
-      text: 'Hai fatto limp/call preflop con una mano debole. Questo è spesso un leak: entri nel piatto senza iniziativa e rischi di giocare fuori posizione.'
+      title: 'Preflop troppo passivo',
+      text: 'Hai fatto limp/call preflop con una mano debole o marginale. Questo è spesso un leak costoso: entri nel piatto senza iniziativa e rischi di giocare una mano difficile.'
     });
   } else if (preflopLine?.action === 'raises' && ['premium', 'strong', 'playable'].includes(cardsEval.strength)) {
     score += 2;
@@ -404,8 +403,8 @@ function parseHand(chunk) {
       score -= 3;
       reasons.push({
         type: 'bad',
-        title: 'River call sospetto',
-        text: 'Hai chiamato al river con una mano iniziale debole o marginale. I call al river sono uno dei leak più costosi: qui va rivista la mano con attenzione.'
+        title: 'Call al river da rivedere',
+        text: 'Hai chiamato al river in uno spot potenzialmente marginale. I call al river sono tra gli errori più costosi perché non ci sono più carte da vedere: devi battere abbastanza spesso il range avversario.'
       });
     } else if (riverCall) {
       score -= 1;
@@ -430,8 +429,8 @@ function parseHand(chunk) {
     score -= 1;
     reasons.push({
       type: 'review',
-      title: 'Hai chiamato un raise',
-      text: 'Quando subisci un raise, il call deve essere giustificato da equity, odds o valore implicito. Questo spot merita review.'
+      title: 'Call contro raise',
+      text: 'Quando subisci un raise, il call deve essere giustificato da equity, pot odds o valore implicito. Questo spot merita una review prioritaria.'
     });
   }
 
@@ -450,12 +449,12 @@ function parseHand(chunk) {
     verdictLabel = 'Possibile errore';
   } else if (score >= 2) {
     verdict = 'good';
-    verdictLabel = 'OK / varianza';
+    verdictLabel = 'Corretto / varianza';
   }
 
   return {
     id: handId,
-    title: handId ? `Hand #${handId}` : 'Hand history',
+    title: handId ? `Mano #${handId}` : 'Hand history',
     heroCards,
     board,
     pot: potText,

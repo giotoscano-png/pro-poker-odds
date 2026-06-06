@@ -76,3 +76,19 @@ Solo uso educativo. Nessun gioco con denaro reale. Nessuna assistenza live.
 - Patch full width reale su desktop
 - Rimossi i limiti visivi che tenevano l'app schiacciata al centro
 - Hand History Analyzer e pagine principali usano tutta la larghezza disponibile
+
+
+## V2.8
+
+- Testi più commerciali e chiari
+- Rinominato Tester HH in Analizza Mani
+- Aggiunte pagine About e Contatti
+- Home focalizzata sulla promessa: errore vs sfortuna/varianza
+- Output mano per mano più leggibile
+
+
+## V2.9
+
+- Ripulite Guide: rimosso testo placeholder sui contenuti SEO
+- Ripulita pagina Leak Finder: rimosso pricing grezzo con importi
+- Inserito modello futuro più professionale

@@ -1,45 +1,61 @@
 import React from 'react';
 import { MonitorDown, FileText, Brain, TrendingUp, Lock, ArrowRight } from 'lucide-react';
-import { useLanguage } from '../i18n.jsx';
 
 export default function DesktopPage({ setPage }) {
-  const { t } = useLanguage();
-
   return (
     <section className="page-card">
       <div className="desktop-hero">
-        <span className="eyebrow"><MonitorDown size={14} /> {t('desktopEyebrow')}</span>
-        <h2>{t('desktopTitle')}</h2>
-        <p>{t('desktopText')}</p>
+        <span className="eyebrow"><MonitorDown size={14} /> Futuro programma PC</span>
+        <h2>Poker Leak Finder</h2>
+        <p>
+          L’obiettivo della versione desktop sarà analizzare le mani già giocate e trasformarle in un report chiaro:
+          possibili errori, spot da rivedere, cooler, bad beat e situazioni in cui hai perso pur giocando correttamente.
+        </p>
         <button className="primary-action" onClick={() => setPage('tester')}>
-          {t('desktopCta')} <ArrowRight size={18} />
+          Prova il demo Analizza Mani <ArrowRight size={18} />
         </button>
       </div>
 
       <div className="roadmap-grid">
-        <Roadmap icon={FileText} title={t('r1Title')} text={t('r1Text')} />
-        <Roadmap icon={Brain} title={t('r2Title')} text={t('r2Text')} />
-        <Roadmap icon={TrendingUp} title={t('r3Title')} text={t('r3Text')} />
-        <Roadmap icon={Lock} title={t('r4Title')} text={t('r4Text')} />
+        <Roadmap
+          icon={FileText}
+          title="Import hand history"
+          text="Caricamento delle hand history salvate dal client poker. Analisi post-sessione, senza leggere il tavolo live."
+        />
+        <Roadmap
+          icon={Brain}
+          title="Errore vs varianza"
+          text="Classificazione degli spot: possibile errore, decisione corretta, cooler, bad beat o mano da rivedere."
+        />
+        <Roadmap
+          icon={TrendingUp}
+          title="Leak dashboard"
+          text="Individuazione dei leak ricorrenti: call troppo larghi, river call costosi, preflop passivo, sizing incoerenti."
+        />
+        <Roadmap
+          icon={Lock}
+          title="Versione premium"
+          text="La web app resta gratuita; il programma PC potrà diventare il prodotto avanzato per chi vuole report più completi."
+        />
       </div>
 
       <div className="pricing-preview">
-        <h3>{t('pricingLater')}</h3>
-        <div className="price-cards">
+        <h3>Modello futuro</h3>
+        <div className="price-cards clean-model">
           <div>
-            <span>{t('freeWeb')}</span>
-            <strong>€0</strong>
-            <p>{t('freeWebText')}</p>
+            <span>Web app gratuita</span>
+            <strong>Free</strong>
+            <p>Odds calculator, pot odds, guide e demo Analizza Mani.</p>
           </div>
           <div>
-            <span>{t('desktopBasic')}</span>
-            <strong>€19.99</strong>
-            <p>{t('desktopBasicText')}</p>
+            <span>Desktop standard</span>
+            <strong>Report</strong>
+            <p>Import hand history, analisi sessione e review mano per mano.</p>
           </div>
           <div>
-            <span>{t('desktopPro')}</span>
-            <strong>€39.99</strong>
-            <p>{t('desktopProText')}</p>
+            <span>Desktop avanzato</span>
+            <strong>Leak Finder</strong>
+            <p>Storico, leak ricorrenti, export report e statistiche personali.</p>
           </div>
         </div>
       </div>
