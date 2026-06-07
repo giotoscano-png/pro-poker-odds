@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>PRO Poker Leak Finder Desktop Beta</title>
+  <style>
+    body{margin:0;background:#07111f;color:#f8fafc;font-family:Inter,Arial,sans-serif}
+    .wrap{max-width:1120px;margin:auto;padding:42px 22px}
+    .hero{border:1px solid rgba(148,163,184,.18);border-radius:34px;padding:34px;background:radial-gradient(circle at 0 0,rgba(134,239,125,.14),transparent 34%),linear-gradient(135deg,#0b1729,#101d34)}
+    .eyebrow{color:#86ef7d;text-transform:uppercase;letter-spacing:.08em;font-weight:900}
+    h1{font-size:clamp(42px,6vw,76px);line-height:.95;letter-spacing:-.06em;margin:18px 0}
+    p{color:#cbd5e1;font-size:18px;line-height:1.55}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:22px}.card{background:rgba(3,9,19,.45);border:1px solid rgba(148,163,184,.16);border-radius:22px;padding:20px}
+    .cta{margin-top:26px;display:grid;grid-template-columns:1fr;gap:14px;max-width:640px}.note{font-size:14px;color:#94a3b8}.box{margin-top:22px;padding:18px;border-radius:18px;background:rgba(134,239,125,.08);border:1px solid rgba(134,239,125,.24)}
+    .amounts{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px}.amount{padding:14px;border-radius:16px;border:1px solid rgba(148,163,184,.22);background:rgba(255,255,255,.04);color:#f8fafc;font-weight:900;cursor:pointer}.amount.active{background:#86ef7d;color:#061006;border-color:#86ef7d;box-shadow:0 0 24px rgba(134,239,125,.18)}
+    a{color:#86ef7d}@media(max-width:800px){.grid,.amounts{grid-template-columns:1fr 1fr}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="hero">
+      <div class="eyebrow">Early Access Desktop Beta</div>
+      <h1>Supporta il progetto e accedi alla Beta Desktop</h1>
+      <p>PRO Poker Leak Finder Desktop importa intere hand history, rileva pattern ricorrenti, calcola odds per street e genera un report coaching esportabile.</p>
+      <p>La Beta è pensata per studio post-sessione. Non offre assistenza live durante il gioco.</p>
+
+      <div class="grid">
+        <div class="card"><b>Import sessioni complete</b><p>Carica file .txt / .log e analizza mani intere.</p></div>
+        <div class="card"><b>Odds per street</b><p>Preflop, flop, turn e river con player count rilevato.</p></div>
+        <div class="card"><b>Report coaching</b><p>Ranking leak, focus prossima sessione ed export HTML.</p></div>
+      </div>
+
+      <div class="box">
+        <b>Scegli quanto supportare</b>
+        <p>Il progetto resta gratuito online. Chi supporta lo sviluppo riceve accesso anticipato alla Beta Desktop tramite link download temporaneo.</p>
+        <div id="amounts" class="amounts" aria-label="Scegli importo supporto"></div>
+      </div>
+
+      <div class="cta">
+        <div id="paypal-button-container"></div>
+        <div id="status" class="note"></div>
+        <p class="note">Download digitale per Windows. Continuando confermi di usare il software solo per studio post-sessione.</p>
+      </div>
+    </section>
+  </main>
+
+<script>
+let selectedAmount = '4.99';
+
+async function loadPayPal() {
+  const cfg = await fetch('/api/paypal-config').then(r => r.json());
+  selectedAmount = cfg.defaultAmount || cfg.amounts?.[0] || '4.99';
+  renderAmounts(cfg.amounts || ['2.99', '4.99', '9.99', '19.99'], cfg.currency || 'EUR');
+
+  if (!cfg.clientId) {
+    document.getElementById('status').textContent = 'PayPal non configurato: inserisci PAYPAL_CLIENT_ID nelle variabili ambiente.';
+    return;
+  }
+  const script = document.createElement('script');
+  script.src = `https://www.paypal.com/sdk/js?client-id=${encodeURIComponent(cfg.clientId)}&currency=${encodeURIComponent(cfg.currency)}&intent=capture`;
+  script.onload = () => renderButtons();
+  document.head.appendChild(script);
+}
+
+function renderAmounts(amounts, currency) {
+  const box = document.getElementById('amounts');
+  box.innerHTML = '';
+  amounts.forEach(amount => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = `amount ${amount === selectedAmount ? 'active' : ''}`;
+    btn.textContent = `${amount} ${currency}`;
+    btn.onclick = () => {
+      selectedAmount = amount;
+      [...box.children].forEach(el => el.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('paypal-button-container').innerHTML = '';
+      renderButtons();
+    };
+    box.appendChild(btn);
+  });
+}
+
+function renderButtons() {
+  if (!window.paypal) return;
+  paypal.Buttons({
+    createOrder: async () => {
+      const res = await fetch('/api/create-paypal-order', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ amount: selectedAmount })
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Errore creazione ordine');
+      return data.id;
+    },
+    onApprove: async (data) => {
+      document.getElementById('status').textContent = 'Supporto confermato, genero link download temporaneo...';
+      const res = await fetch('/api/capture-paypal-order', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ orderId: data.orderID })
+      });
+      const result = await res.json();
+      if (!res.ok) {
+        document.getElementById('status').textContent = 'Pagamento non completato o non valido.';
+        return;
+      }
+      window.location.href = result.downloadUrl;
+    },
+    onError: (err) => {
+      console.error(err);
+      document.getElementById('status').textContent = 'Errore PayPal. Riprova tra poco.';
+    }
+  }).render('#paypal-button-container');
+}
+
+loadPayPal();
+</script>
+</body>
+</html>
