@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PRO Poker Odds | Poker Odds, Pot Odds, Hand Review & Blackjack Tools</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=8" />
+<meta name="theme-color" content="#080b13" />
+
+
+
+    <meta name="description" content="Free poker study tools: calculate poker odds, pot odds, equity, review hand histories and train blackjack basic strategy. Educational only, no real-money gambling." />
+    <meta name="keywords" content="poker odds, pot odds, poker equity, flush draw odds, straight draw odds, hand history review, blackjack basic strategy, blackjack hit or stand" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://pro-poker-odds.vercel.app/" />
+
+    <meta property="og:title" content="PRO Poker Odds | Poker Odds, Pot Odds & Hand Review Tools" />
+    <meta property="og:description" content="Free educational tools for poker odds, pot odds, equity, hand history review and blackjack basic strategy." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://pro-poker-odds.vercel.app/" />
+    <meta property="og:site_name" content="PRO Poker Odds" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="PRO Poker Odds | Poker Odds & Hand Review Tools" />
+    <meta name="twitter:description" content="Free educational poker and blackjack tools: odds, pot odds, hand review and basic strategy." />
+
+    <!-- Google Search Console verification:
+         after creating the URL-prefix property, paste the Google meta tag here, for example:
+         <meta name="google-site-verification" content="YOUR_CODE_HERE" />
+    -->
+
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

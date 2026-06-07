@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://pro-poker-odds.vercel.app/sitemap.xml
+Sitemap: https://pro-poker-odds.vercel.app/sitemap-google.xml

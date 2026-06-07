@@ -1,0 +1,7 @@
+{
+  "site": "PRO Poker Odds",
+  "canonical_url": "https://pro-poker-odds.vercel.app/",
+  "primary_sitemap": "https://pro-poker-odds.vercel.app/sitemap.xml",
+  "alternate_sitemap_for_search_console": "https://pro-poker-odds.vercel.app/sitemap-google.xml",
+  "note": "If Search Console caches /sitemap.xml as red, submit sitemap-google.xml as a fresh sitemap entry."
+}

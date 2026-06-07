@@ -1,0 +1,19 @@
+{
+  "version": "5.4.3",
+  "note": "All guide copy is fully translated in IT/EN/ES/FR/DE. Hash routes are shareable; clean routes can be added later for stronger SEO.",
+  "guide_routes": [
+    "#/guides/pot-odds-explained",
+    "#/guides/poker-equity-explained",
+    "#/guides/flush-draw-odds",
+    "#/guides/straight-draw-odds",
+    "#/guides/top-10-poker-mistakes",
+    "#/guides/blackjack-hit-or-stand"
+  ],
+  "languages": [
+    "it",
+    "en",
+    "es",
+    "fr",
+    "de"
+  ]
+}
