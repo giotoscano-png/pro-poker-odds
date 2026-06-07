@@ -281,3 +281,17 @@ Then go back to Google Search Console and click **Verify**.
 
 If `/sitemap.xml` remains red in Search Console because of cache, submit:
 `sitemap-google.xml`
+
+
+## V5.6 Leak Finder Pro Preview
+
+- Upgraded only the Leak Finder page.
+- Kept Analyze Hands / Hand Review unchanged.
+- Leak Finder now works as a Pro preview of Analyze Hands:
+  - premium hero section
+  - session report preview
+  - recurring leak categories
+  - future workflow
+  - future Desktop Basic / Desktop Pro model
+  - full multilingual copy in IT / EN / ES / FR / DE
+  - post-session / no live-assistance disclaimer preserved

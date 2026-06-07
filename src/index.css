@@ -3205,3 +3205,391 @@ code {
   border-color: rgba(134,239,125,.40);
   background: rgba(134,239,125,.12);
 }
+
+
+/* V5.6 Leak Finder Pro Preview */
+.leak-pro-page {
+  gap: 18px;
+}
+
+.leak-pro-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(360px, .92fr);
+  gap: 18px;
+  align-items: stretch;
+  border: 1px solid rgba(167,139,250,.30);
+  background:
+    radial-gradient(circle at top right, rgba(167,139,250,.22), transparent 32%),
+    radial-gradient(circle at bottom left, rgba(134,239,125,.12), transparent 34%),
+    rgba(255,255,255,.055);
+  border-radius: 30px;
+  padding: 28px;
+  box-shadow: 0 28px 80px rgba(0,0,0,.24);
+}
+
+.leak-pro-copy h2 {
+  font-size: clamp(44px, 6vw, 82px);
+  line-height: .95;
+  margin: 16px 0 16px;
+  letter-spacing: -0.055em;
+}
+
+.leak-pro-copy p {
+  max-width: 800px;
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1.58;
+}
+
+.leak-pro-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 24px;
+}
+
+.leak-anchor {
+  text-decoration: none;
+}
+
+.leak-trust-row {
+  display: flex;
+  gap: 9px;
+  flex-wrap: wrap;
+  margin-top: 18px;
+}
+
+.leak-trust-row span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid rgba(134,239,125,.22);
+  background: rgba(134,239,125,.075);
+  color: var(--primary);
+  border-radius: 999px;
+  padding: 8px 10px;
+  font-size: 12px;
+  font-weight: 950;
+}
+
+.leak-pro-device {
+  border: 1px solid rgba(255,255,255,.16);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.075), rgba(255,255,255,.045)),
+    #111827;
+  border-radius: 28px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.08), 0 26px 70px rgba(0,0,0,.24);
+}
+
+.device-topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 950;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+}
+
+.device-topline span,
+.device-topline strong {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.device-topline strong {
+  color: #061006;
+  background: var(--primary);
+  border-radius: 999px;
+  padding: 6px 9px;
+}
+
+.device-main-score {
+  border: 1px solid rgba(167,139,250,.26);
+  background:
+    radial-gradient(circle at top left, rgba(167,139,250,.18), transparent 36%),
+    rgba(8,11,19,.38);
+  border-radius: 22px;
+  padding: 16px;
+}
+
+.device-main-score span {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 950;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  margin-bottom: 8px;
+}
+
+.device-main-score strong {
+  display: block;
+  color: #d8b4fe;
+  font-size: 28px;
+  line-height: 1.05;
+}
+
+.device-main-score p {
+  color: var(--muted);
+  margin: 10px 0 0;
+  line-height: 1.45;
+}
+
+.device-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0,1fr));
+  gap: 8px;
+}
+
+.device-metrics div {
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(255,255,255,.055);
+  border-radius: 18px;
+  padding: 12px;
+}
+
+.device-metrics strong {
+  display: block;
+  color: var(--primary);
+  font-size: 26px;
+  line-height: 1;
+}
+
+.device-metrics span {
+  display: block;
+  color: var(--muted);
+  font-size: 11px;
+  margin-top: 7px;
+  line-height: 1.25;
+  font-weight: 800;
+}
+
+.device-leak-list {
+  display: grid;
+  gap: 8px;
+}
+
+.device-leak-list div {
+  border-radius: 16px;
+  padding: 11px 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 900;
+  color: var(--text);
+}
+
+.risk-high {
+  background: rgba(251,113,133,.12);
+  border: 1px solid rgba(251,113,133,.28);
+}
+
+.risk-mid {
+  background: rgba(250,204,21,.10);
+  border: 1px solid rgba(250,204,21,.24);
+}
+
+.risk-good {
+  background: rgba(134,239,125,.10);
+  border: 1px solid rgba(134,239,125,.24);
+}
+
+.leak-section {
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(255,255,255,.04);
+  border-radius: 28px;
+  padding: 22px;
+}
+
+.section-header.compact {
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.section-header.compact h2 {
+  font-size: 34px;
+}
+
+.leak-type-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: 14px;
+}
+
+.leak-type-card {
+  border: 1px solid rgba(255,255,255,.11);
+  background:
+    radial-gradient(circle at top right, rgba(167,139,250,.12), transparent 35%),
+    rgba(255,255,255,.055);
+  border-radius: 22px;
+  padding: 18px;
+  min-height: 220px;
+  transition: transform .18s ease, border-color .18s ease, background .18s ease;
+}
+
+.leak-type-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(167,139,250,.34);
+  background:
+    radial-gradient(circle at top right, rgba(167,139,250,.18), transparent 38%),
+    rgba(255,255,255,.07);
+}
+
+.leak-type-card h3,
+.workflow-step h3,
+.leak-plan-card h3 {
+  margin: 14px 0 8px;
+}
+
+.leak-type-card p,
+.workflow-step p,
+.leak-plan-card p {
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.leak-workflow {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0,1fr));
+  gap: 12px;
+}
+
+.workflow-step {
+  position: relative;
+  border: 1px solid rgba(110,231,255,.16);
+  background: rgba(110,231,255,.045);
+  border-radius: 22px;
+  padding: 18px;
+  min-height: 220px;
+}
+
+.workflow-number {
+  position: absolute;
+  right: 15px;
+  top: 13px;
+  color: rgba(255,255,255,.16);
+  font-size: 32px;
+  font-weight: 1000;
+}
+
+.leak-premium-section {
+  border-color: rgba(134,239,125,.20);
+  background:
+    radial-gradient(circle at top right, rgba(134,239,125,.12), transparent 32%),
+    rgba(134,239,125,.035);
+}
+
+.leak-plan-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: 14px;
+}
+
+.leak-plan-card {
+  border: 1px solid rgba(134,239,125,.20);
+  background: rgba(8,11,19,.36);
+  border-radius: 24px;
+  padding: 20px;
+}
+
+.leak-plan-card > span {
+  display: inline-flex;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 1000;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+
+.leak-plan-card > strong {
+  display: block;
+  color: var(--primary);
+  font-size: 30px;
+  line-height: 1.1;
+  margin: 10px 0;
+}
+
+.plan-bullets {
+  display: grid;
+  gap: 9px;
+  margin-top: 16px;
+}
+
+.plan-bullets div {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  color: var(--text);
+  font-weight: 850;
+}
+
+.plan-bullets svg {
+  color: var(--primary);
+}
+
+.leak-disclaimer {
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.045);
+  border-radius: 20px;
+  padding: 14px 16px;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  color: var(--muted);
+}
+
+.leak-disclaimer svg {
+  color: var(--primary);
+  flex: 0 0 auto;
+  margin-top: 2px;
+}
+
+.leak-disclaimer p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+@media (max-width: 1100px) {
+  .leak-pro-hero {
+    grid-template-columns: 1fr;
+  }
+
+  .leak-type-grid {
+    grid-template-columns: repeat(2, minmax(0,1fr));
+  }
+
+  .leak-workflow {
+    grid-template-columns: repeat(2, minmax(0,1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .leak-pro-hero {
+    padding: 20px;
+  }
+
+  .leak-pro-copy h2 {
+    font-size: 46px;
+  }
+
+  .device-metrics,
+  .leak-type-grid,
+  .leak-workflow,
+  .leak-plan-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .device-topline {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
