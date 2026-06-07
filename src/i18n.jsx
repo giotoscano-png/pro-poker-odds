@@ -1719,6 +1719,79 @@ Object.entries(leakFinderProTranslations).forEach(([lang, values]) => {
 });
 
 
+const leakFinderDownloadFixTranslations = {
+  "it": {
+    "lfPremiumEyebrow": "Download futuro",
+    "lfPremiumTitle": "Leak Finder PRO",
+    "lfPremiumText": "La versione desktop sarà un unico download PRO completo. Per ora il download resta bloccato: verrà collegato quando il programma beta sarà pronto.",
+    "lfDownloadBadge": "Download bloccato",
+    "lfDownloadTitle": "PRO Desktop Beta",
+    "lfDownloadText": "Area predisposta per il futuro download del programma. Quando sarà pronto, il collegamento potrà essere attivato dopo il supporto al progetto.",
+    "lfDownload1": "Import hand history",
+    "lfDownload2": "Leak Finder completo",
+    "lfDownload3": "Report sessione e storico",
+    "lfDownload4": "Export PDF futuro",
+    "lfDownloadButton": "Download non ancora disponibile"
+  },
+  "en": {
+    "lfPremiumEyebrow": "Future download",
+    "lfPremiumTitle": "Leak Finder PRO",
+    "lfPremiumText": "The desktop version will be one complete PRO download. For now the download stays locked: it can be connected when the beta program is ready.",
+    "lfDownloadBadge": "Download locked",
+    "lfDownloadTitle": "PRO Desktop Beta",
+    "lfDownloadText": "This area is prepared for the future program download. Once ready, the link can be activated after supporting the project.",
+    "lfDownload1": "Hand history import",
+    "lfDownload2": "Full Leak Finder",
+    "lfDownload3": "Session reports and history",
+    "lfDownload4": "Future PDF export",
+    "lfDownloadButton": "Download not available yet"
+  },
+  "es": {
+    "lfPremiumEyebrow": "Descarga futura",
+    "lfPremiumTitle": "Leak Finder PRO",
+    "lfPremiumText": "La versión desktop será una única descarga PRO completa. Por ahora la descarga queda bloqueada: se podrá conectar cuando el programa beta esté listo.",
+    "lfDownloadBadge": "Descarga bloqueada",
+    "lfDownloadTitle": "PRO Desktop Beta",
+    "lfDownloadText": "Área preparada para la futura descarga del programa. Cuando esté listo, el enlace podrá activarse después de apoyar el proyecto.",
+    "lfDownload1": "Import hand history",
+    "lfDownload2": "Leak Finder completo",
+    "lfDownload3": "Reportes de sesión e historial",
+    "lfDownload4": "Exportación PDF futura",
+    "lfDownloadButton": "Descarga aún no disponible"
+  },
+  "fr": {
+    "lfPremiumEyebrow": "Téléchargement futur",
+    "lfPremiumTitle": "Leak Finder PRO",
+    "lfPremiumText": "La version desktop sera un seul téléchargement PRO complet. Pour l’instant, le téléchargement reste bloqué : il pourra être connecté lorsque le programme bêta sera prêt.",
+    "lfDownloadBadge": "Téléchargement bloqué",
+    "lfDownloadTitle": "PRO Desktop Beta",
+    "lfDownloadText": "Zone préparée pour le futur téléchargement du programme. Quand il sera prêt, le lien pourra être activé après soutien au projet.",
+    "lfDownload1": "Import hand history",
+    "lfDownload2": "Leak Finder complet",
+    "lfDownload3": "Rapports de session et historique",
+    "lfDownload4": "Export PDF futur",
+    "lfDownloadButton": "Téléchargement pas encore disponible"
+  },
+  "de": {
+    "lfPremiumEyebrow": "Zukünftiger Download",
+    "lfPremiumTitle": "Leak Finder PRO",
+    "lfPremiumText": "Die Desktop-Version wird ein vollständiger PRO-Download sein. Der Download bleibt vorerst gesperrt und kann verbunden werden, sobald das Beta-Programm bereit ist.",
+    "lfDownloadBadge": "Download gesperrt",
+    "lfDownloadTitle": "PRO Desktop Beta",
+    "lfDownloadText": "Dieser Bereich ist für den zukünftigen Programm-Download vorbereitet. Sobald er bereit ist, kann der Link nach Unterstützung des Projekts aktiviert werden.",
+    "lfDownload1": "Hand-History-Import",
+    "lfDownload2": "Vollständiger Leak Finder",
+    "lfDownload3": "Session Reports und Verlauf",
+    "lfDownload4": "Zukünftiger PDF-Export",
+    "lfDownloadButton": "Download noch nicht verfügbar"
+  }
+};
+
+Object.entries(leakFinderDownloadFixTranslations).forEach(([lang, values]) => {
+  translations[lang] = { ...(translations[lang] || {}), ...values };
+});
+
+
 function interpolate(value, vars = {}) {
   if (typeof value !== 'string') return value;
   return value.replace(/\{(\w+)\}/g, (_, key) => (vars[key] ?? `{${key}}`));

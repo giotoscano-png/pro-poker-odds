@@ -11,6 +11,7 @@ import {
   FileText,
   History,
   ListChecks,
+  Lock,
   MonitorDown,
   ShieldCheck,
   Target,
@@ -42,13 +43,13 @@ const workflow = [
   { icon: Download, title: 'lfStep4Title', text: 'lfStep4Text' },
 ];
 
-const planCards = [
-  { title: 'lfBasicTitle', price: 'lfBasicPrice', text: 'lfBasicText', bullets: ['lfBasic1', 'lfBasic2', 'lfBasic3'] },
-  { title: 'lfProTitle', price: 'lfProPrice', text: 'lfProText', bullets: ['lfPro1', 'lfPro2', 'lfPro3'] },
-];
-
 export default function DesktopPage({ setPage }) {
   const { t } = useLanguage();
+
+  const scrollToReport = () => {
+    const element = document.getElementById('leak-report-preview');
+    if (element) element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  };
 
   return (
     <section className="page-card leak-pro-page">
@@ -62,9 +63,9 @@ export default function DesktopPage({ setPage }) {
             <button className="primary-action" onClick={() => setPage('tester')}>
               {t('lfPrimaryCta')} <ArrowRight size={18} />
             </button>
-            <a className="secondary-action leak-anchor" href="#leak-report-preview">
+            <button className="secondary-action" type="button" onClick={scrollToReport}>
               {t('lfSecondaryCta')}
-            </a>
+            </button>
           </div>
 
           <div className="leak-trust-row">
@@ -153,20 +154,29 @@ export default function DesktopPage({ setPage }) {
           </div>
         </div>
 
-        <div className="leak-plan-grid">
-          {planCards.map((plan) => (
-            <article key={plan.title} className="leak-plan-card">
-              <span>{t(plan.title)}</span>
-              <strong>{t(plan.price)}</strong>
-              <p>{t(plan.text)}</p>
-              <div className="plan-bullets">
-                {plan.bullets.map((bullet) => (
-                  <div key={bullet}><CheckCircle2 size={15} /> {t(bullet)}</div>
-                ))}
-              </div>
-            </article>
-          ))}
-        </div>
+        <article className="leak-download-card">
+          <div className="download-card-main">
+            <div className="download-lock">
+              <Lock size={28} />
+            </div>
+            <div>
+              <span>{t('lfDownloadBadge')}</span>
+              <h3>{t('lfDownloadTitle')}</h3>
+              <p>{t('lfDownloadText')}</p>
+            </div>
+          </div>
+
+          <div className="download-features">
+            <div><CheckCircle2 size={15} /> {t('lfDownload1')}</div>
+            <div><CheckCircle2 size={15} /> {t('lfDownload2')}</div>
+            <div><CheckCircle2 size={15} /> {t('lfDownload3')}</div>
+            <div><CheckCircle2 size={15} /> {t('lfDownload4')}</div>
+          </div>
+
+          <button className="download-locked-button" type="button" disabled>
+            <Lock size={16} /> {t('lfDownloadButton')}
+          </button>
+        </article>
       </section>
 
       <div className="leak-disclaimer">

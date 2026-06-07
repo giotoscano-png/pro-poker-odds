@@ -295,3 +295,13 @@ If `/sitemap.xml` remains red in Search Console because of cache, submit:
   - future Desktop Basic / Desktop Pro model
   - full multilingual copy in IT / EN / ES / FR / DE
   - post-session / no live-assistance disclaimer preserved
+
+
+## V5.6.1 Leak Finder Pro Download Fix
+
+- Fixed the "View report preview" button: it now scrolls inside the page instead of changing hash route.
+- Removed Desktop Basic / Desktop Pro split.
+- Leak Finder is now presented as one future PRO desktop download.
+- Added a locked/coming-soon download card ready to connect later.
+- No price is displayed on the page.
+- Analyze Hands remains unchanged.
